@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+        maven { url "http://repo.spring.io/snapshot" }
+        maven { url "http://repo.spring.io/milestone" }
+
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:${asciidoctorVersion}")
+
+    }
+}
+
+apply plugin: 'spring-boot'
+apply plugin: 'org.asciidoctor.gradle.asciidoctor'
+
+
+dependencies {
+    compile group: 'io.springfox', name: 'springfox-swagger2'
+    compile group: 'io.springfox', name: 'springfox-swagger-ui'
+    compile group: "io.netty", name: "netty-all"
+	
+	compile('org.springframework.boot:spring-boot-autoconfigure') {
+        exclude module: 'caffeine'
+    }
+    compile('org.springframework.boot:spring-boot-starter-web')
+
+    compile group: 'org.projectlombok', name: 'lombok'
+
+    compile("org.springframework.plugin:spring-plugin-core:1.1.0.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile files('./src/main/resources/LightingProxy-0.1.jar')
+    compile('org.postgresql:postgresql:9.4-1201-jdbc4')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile ('org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final')
+    runtime('org.postgresql:postgresql:9.4-1201-jdbc4')
+    runtime files('./src/main/resources/LightingProxy-0.1.jar')
+    runtime('wsdl4j:wsdl4j:1.6.3')
+    runtime('commons-discovery:commons-discovery:0.5')
+    runtime 'com.google.guava:guava:19.0'
+    runtime('org.postgresql:postgresql')
+    runtime ('javax.xml:jaxrpc-api:1.1')
+    runtime ('org.apache.axis:axis:1.4')
+
+
+
+    testCompile group: 'junit', name: 'junit'
+    testCompile ('org.springframework.boot:spring-boot-starter-test')
+    
+    testCompile group: 'junit', name: 'junit'
+    testCompile group: 'org.springframework.restdocs', name: 'spring-restdocs-mockmvc'
+    testCompile group: 'org.springframework.boot', name: 'spring-boot-starter-test'
+    testCompile('org.springframework.boot:spring-boot-configuration-processor')
+    testCompile group: 'com.jayway.jsonpath', name: 'json-path-assert'
+    testCompile('org.powermock:powermock-api-mockito:1.6.4')
+    testCompile('org.powermock:powermock-module-junit4-rule-agent:1.6.4')
+    testCompile('org.hamcrest:hamcrest-junit:2.0.0.0')
+}
+
+bootRun {
+    systemProperties System.properties
+}

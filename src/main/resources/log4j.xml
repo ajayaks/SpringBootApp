@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration debug="true" xmlns:log4j='http://jakarta.apache.org/log4j/'>
+
+	<appender name="console" class="org.apache.log4j.ConsoleAppender">
+	    <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" 
+			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+ 
+	<appender name="file" class="org.apache.log4j.RollingFileAppender">
+	    <param name="append" value="true" />
+	    <param name="maxFileSize" value="10MB" />
+	    <param name="maxBackupIndex" value="10" />
+	    <param name="file" value="/alm/logs/hpalm.log" />
+	    <layout class="org.apache.log4j.PatternLayout">
+		<param name="ConversionPattern" 
+			value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+	
+	<!-- Application Loggers -->
+	<logger name="com.vz.ts.vt">
+		<level value="info" />
+	</logger>
+	<logger name="io.swagger.models.parameters.AbstractSerializableParameter" level="ERROR" />
+	
+	<!-- 3rdparty Loggers  
+	<category name="org.springframework">
+	    <priority value="DEBUG" />
+	</category>
+
+	<category name="org.springframework.beans">
+	    <priority value="DEBUG" />
+	</category>
+	
+	<category name="org.springframework.web">
+	    <priority value="DEBUG" />
+	</category>
+	
+	<category name="org.springframework.security">
+	    <priority value="DEBUG" />
+	</category>
+	
+	<category
+	    name="org.springframework.beans.CachedIntrospectionResults">
+	    <priority value="DEBUG" />
+	</category>
+	
+	<category name="org.springframework.jdbc.core">
+	    <priority value="DEBUG" />
+	</category>
+	
+	<category
+	    name="org.springframework.transaction.support.TransactionSynchronizationManager">
+	    <priority value="DEBUG" />
+	</category>
+	-->
+	<!-- Root Logger -->
+	<root>
+		<level value="info" />
+		<appender-ref ref="console" />
+		<appender-ref ref="file" />
+	</root>
+
+</log4j:configuration>
